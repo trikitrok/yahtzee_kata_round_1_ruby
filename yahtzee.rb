@@ -17,10 +17,10 @@ class Yahtzee
   private
 
   def do_reruns
-    @console.print("[1] Dice to re-run:")
-    roll(dice_to_rerun)
-    @console.print("[2] Dice to re-run:")
-    roll(dice_to_rerun)
+    2.times do |time|
+      @console.print("[#{time+1}] Dice to re-run:")
+      roll(dice_to_rerun)
+    end
   end
 
   def roll dice_to_roll
