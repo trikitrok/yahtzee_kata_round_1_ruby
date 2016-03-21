@@ -1,15 +1,17 @@
 class Yahtzee
-  def initialize console, die_roller, notifier
+  def initialize console, die_roller, user_input_reader, notifier
     @console = console
     @die_roller = die_roller
     @notifier = notifier
+    @user_input_reader = user_input_reader
   end
 
   def play
     @console.print("Category: Ones")
     roll([:d1, :d2, :d3, :d4, :d5])
     @console.print("[1] Dice to re-run:")
-    @notifier.notify_rolled_dice([1, 5, 1, 2,1])
+    dice_to_rerun = @user_input_reader.read_line()
+    @notifier.notify_rolled_dice([1, 5, 1, 2, 1])
   end
 
   private
