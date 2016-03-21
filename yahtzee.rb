@@ -1,8 +1,8 @@
 class Yahtzee
-  def initialize console, die_roller
+  def initialize console, die_roller, notifier
     @console = console
     @die_roller = die_roller
-    @notifier = ConsoleNotifier.new(console)
+    @notifier = notifier
   end
 
   def play

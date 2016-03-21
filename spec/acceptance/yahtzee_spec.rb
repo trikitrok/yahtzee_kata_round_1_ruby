@@ -6,7 +6,8 @@ describe "Yahtzee game" do
     die_roller = double()
     expect(die_roller).to receive(:roll).and_return(2,4,1,6,1)
     console = FakeConsole.new
-    yahtzee = Yahtzee.new(console, die_roller)
+    notifier = ConsoleNotifier.new(console)
+    yahtzee = Yahtzee.new(console, die_roller, notifier)
 
     yahtzee.play
 
