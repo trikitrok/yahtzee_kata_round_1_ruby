@@ -12,6 +12,13 @@ class Yahtzee
   private 
   def roll dice
     rolled_dice = dice.map { @die_roller.roll() }
-    @console.print("Dice: D1:#{rolled_dice[0]} D2:#{rolled_dice[1]} D3:#{rolled_dice[2]} D4:#{rolled_dice[3]} D5:#{rolled_dice[4]}")
+    notify_rolled_dice(rolled_dice)
+  end
+
+  def notify_rolled_dice rolled_dice
+    formatted_dice_strs = rolled_dice.each_with_index.map do |die, i|
+      "D#{i+1}:#{rolled_dice[i]}"
+    end
+    @console.print("Dice: " + formatted_dice_strs.join(" "))
   end
 end
