@@ -1,4 +1,6 @@
 require_relative '../../yahtzee'
+require_relative "../../dice_roller"
+require_relative "../../console_notifier"
 require_relative '../helpers/fake_console'
 
 describe "Yahtzee game" do
@@ -9,7 +11,8 @@ describe "Yahtzee game" do
     expect(user_input_reader).to receive(:read_line).and_return("D1 D2 D4")
     console = FakeConsole.new
     notifier = ConsoleNotifier.new(console)
-    yahtzee = Yahtzee.new(console, die_roller, user_input_reader, notifier)
+    dice_roller = DiceRoller.new(die_roller)
+    yahtzee = Yahtzee.new(console, die_roller, user_input_reader, notifier, dice_roller)
 
     yahtzee.play
 
