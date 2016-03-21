@@ -12,6 +12,7 @@ class Yahtzee
     @console.print("Category: Ones")
     roll([:d1, :d2, :d3, :d4, :d5])
     do_reruns()
+    @console.print("Category Ones score: 4")
   end
 
   private
