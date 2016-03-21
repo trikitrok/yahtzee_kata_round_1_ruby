@@ -12,7 +12,7 @@ describe "Yahtzee game" do
     console = FakeConsole.new
     notifier = ConsoleNotifier.new(console)
     dice_roller = DiceRoller.new(die_roller)
-    yahtzee = Yahtzee.new(console, die_roller, user_input_reader, notifier, dice_roller)
+    yahtzee = Yahtzee.new(console, user_input_reader, notifier, dice_roller)
 
     yahtzee.play
 

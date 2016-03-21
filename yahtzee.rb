@@ -1,7 +1,6 @@
 class Yahtzee
-  def initialize console, die_roller, user_input_reader, notifier, dice_roller
+  def initialize console, user_input_reader, notifier, dice_roller
     @console = console
-    @die_roller = die_roller
     @notifier = notifier
     @user_input_reader = user_input_reader
     @dice_roller = dice_roller
