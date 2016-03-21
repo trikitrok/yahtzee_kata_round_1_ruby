@@ -19,8 +19,8 @@ class Yahtzee
   NUM_RERUNS = 2
 
   def do_reruns
-    NUM_RERUNS.times do |time|
-      @console.print("[#{time+1}] Dice to re-run:")
+    NUM_RERUNS.times do |reruns_so_far|
+      @notifier.notify_user_to_introduce_dice_to_rerun(reruns_so_far)
       roll(dice_to_rerun)
     end
   end
