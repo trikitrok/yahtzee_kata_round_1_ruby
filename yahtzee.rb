@@ -7,6 +7,7 @@ class Yahtzee
   def play
     @console.print("Category: Ones")
     roll([:d1, :d2, :d3, :d4, :d5])
+    @console.print("[1] Dice to re-run:")
   end
 
   private 
