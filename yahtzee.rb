@@ -1,3 +1,5 @@
+require "./input_line"
+
 class Yahtzee
   def initialize console, user_input_reader, notifier, dice_roller
     @console = console
@@ -22,7 +24,7 @@ class Yahtzee
   end
 
   def dice_to_rerun
-    user_input = @user_input_reader.read_line()
-    user_input.split(" ").map{|die_as_str| die_as_str.downcase.to_sym }
+    input_line = InputLine.new(@user_input_reader.read_line())
+    input_line.dice_to_rerun()
   end
 end
