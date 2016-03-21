@@ -6,7 +6,8 @@ require_relative '../helpers/fake_console'
 describe "Yahtzee game" do
   it "produces the expected output" do
     die_roller = double()
-    expect(die_roller).to receive(:roll).and_return(2,4,1,6,1)
+    expect(die_roller).to receive(:roll).and_return(2,4,1,6,1,
+                                                    1, 5, 2)
     user_input_reader = double()
     expect(user_input_reader).to receive(:read_line).and_return("D1 D2 D4")
     console = FakeConsole.new

@@ -10,8 +10,9 @@ class Yahtzee
     @console.print("Category: Ones")
     roll([:d1, :d2, :d3, :d4, :d5])
     @console.print("[1] Dice to re-run:")
-    dice_to_rerun = @user_input_reader.read_line()
-    @notifier.notify_rolled_dice([1, 5, 1, 2, 1])
+    user_input = @user_input_reader.read_line()
+    dice_to_rerun = user_input.split(" ").map{|die_as_str| die_as_str.downcase.to_sym }
+    roll(dice_to_rerun)
   end
 
   private
