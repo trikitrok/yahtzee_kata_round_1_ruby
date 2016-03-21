@@ -1,10 +1,13 @@
 class Yahtzee
-  def initialize console
+  def initialize console, die_roller
     @console = console
+    @die_roller = die_roller
   end
 
   def play
     @console.print("Category: Ones")
-    @console.print("Dice: D1:2 D2:4 D3:1 D4:6 D5:1")
+    rolled_dice = []
+    5.times { rolled_dice << @die_roller.roll() }
+    @console.print("Dice: D1:#{rolled_dice[0]} D2:#{rolled_dice[1]} D3:#{rolled_dice[2]} D4:#{rolled_dice[3]} D5:#{rolled_dice[4]}")
   end
 end
