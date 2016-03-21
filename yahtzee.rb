@@ -13,6 +13,8 @@ class Yahtzee
     roll([:d1, :d2, :d3, :d4, :d5])
     @console.print("[1] Dice to re-run:")
     roll(dice_to_rerun)
+    @console.print("[2] Dice to re-run:")
+    roll(dice_to_rerun)
   end
 
   private
