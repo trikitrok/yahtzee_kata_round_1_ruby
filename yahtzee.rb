@@ -11,13 +11,17 @@ class Yahtzee
   def play
     @console.print("Category: Ones")
     roll([:d1, :d2, :d3, :d4, :d5])
+    do_reruns()
+  end
+
+  private
+
+  def do_reruns
     @console.print("[1] Dice to re-run:")
     roll(dice_to_rerun)
     @console.print("[2] Dice to re-run:")
     roll(dice_to_rerun)
   end
-
-  private
 
   def roll dice_to_roll
     @dice_roller.roll(dice_to_roll)
