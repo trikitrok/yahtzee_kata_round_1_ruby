@@ -1,9 +1,12 @@
+require_relative "./dice_roller"
+
 class Yahtzee
   def initialize console, die_roller, user_input_reader, notifier
     @console = console
     @die_roller = die_roller
     @notifier = notifier
     @user_input_reader = user_input_reader
+    @dice_roller = DiceRoller.new(@die_roller)
   end
 
   def play
@@ -15,8 +18,9 @@ class Yahtzee
   end
 
   private
-  def roll dice
-    rolled_dice = dice.map { @die_roller.roll() }
-    @notifier.notify_rolled_dice(rolled_dice)
+  def roll dice_to_roll
+    @dice_roller.roll(dice_to_roll)
+    rolled_dice = @dice_roller.last_rolled_dice()
+    @notifier.notify_rolled_dice(rolled_dice.values())
   end
 end
