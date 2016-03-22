@@ -10,12 +10,13 @@ class Yahtzee
   end
 
   def play
-    @console.print("Category: Ones")
+    @notifier.notify_current_category(:ones)
     roll([:d1, :d2, :d3, :d4, :d5])
     do_reruns()
     score = compute_score(:ones)
     @console.print("Category Ones score: #{score}")
-    @console.print("Category: Twos")
+    
+    @notifier.notify_current_category(:twos)
     roll([:d1, :d2, :d3, :d4, :d5])
     do_reruns()
     score = compute_score(:twos)
