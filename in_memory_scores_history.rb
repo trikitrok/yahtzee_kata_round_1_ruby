@@ -23,4 +23,11 @@ class InMemoryScoresHistory
     end
     max_scores.reduce(&:+)
   end
+
+  def max_scores_by_category categories
+    categories.reduce({}) do |acc, category|
+      acc[category] = max_score_for(category)
+      acc
+    end
+  end
 end
