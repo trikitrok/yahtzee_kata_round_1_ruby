@@ -4,10 +4,15 @@ class DiceScorer
   end
 
   def initialize category
-
+    @category = category
   end
 
   def compute_score dice
-    dice.select {|k,v| v == 1}.count
+    desired_value = VALUES_BY_CATEGORY[@category]
+    dice.select {|_, value| value == desired_value}.count
   end
+
+  private 
+
+  VALUES_BY_CATEGORY = {ones: 1, twos: 2}
 end
