@@ -1,8 +1,10 @@
 require_relative '../../yahtzee'
+require_relative '../../reruns'
 require_relative "../../dice_roller"
 require_relative "../../console_notifier"
 require_relative '../helpers/fake_console'
 require_relative "../../in_memory_scores_history"
+require_relative "../../categories"
 
 describe "Yahtzee game" do
   it "produces the expected output" do
@@ -27,7 +29,9 @@ describe "Yahtzee game" do
     notifier = ConsoleNotifier.new(console)
     dice_roller = DiceRoller.new(die_roller)
     scores_history = InMemoryScoresHistory.new(Yahtzee::CATEGORIES)
-    yahtzee = Yahtzee.new(user_input_reader, notifier, dice_roller, scores_history)
+    reruns = Reruns.new(user_input_reader, notifier, dice_roller)
+    categories = Categories.new(notifier, reruns, scores_history, dice_roller)
+    yahtzee = Yahtzee.new(notifier, scores_history, categories)
 
     yahtzee.play
 
