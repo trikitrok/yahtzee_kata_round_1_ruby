@@ -1,13 +1,12 @@
 require_relative "./input_line"
 require_relative "./category"
-require_relative "./in_memory_scores_history"
 
 class Yahtzee
-  def initialize user_input_reader, notifier, dice_roller
+  def initialize user_input_reader, notifier, dice_roller, scores_history
     @notifier = notifier
     @user_input_reader = user_input_reader
     @dice_roller = dice_roller
-    @scores_history = InMemoryScoresHistory.new(categories)
+    @scores_history = scores_history
   end
 
   def play
@@ -18,10 +17,11 @@ class Yahtzee
     summarize_scores_by_category()
   end
 
+  CATEGORIES = [Category.ones, Category.twos, Category.threes]
+
   private
 
   NUM_RERUNS = 2
-  CATEGORIES_IDS = [:ones, :twos, :threes]
 
   def play_category category
     @notifier.notify_current_category(category)
@@ -58,7 +58,7 @@ class Yahtzee
   end
 
   def categories
-    CATEGORIES_IDS.map {|category_id| Category.new(category_id)}
+    CATEGORIES
   end
 
   def annotate_score category, score
