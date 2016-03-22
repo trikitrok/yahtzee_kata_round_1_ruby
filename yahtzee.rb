@@ -10,33 +10,52 @@ class Yahtzee
   end
 
   def play
-    categories.each do |category|
-      play_category(category)
-    end
-
-    summarize_scores_by_category()
+    play_all_categories()
+    summarize_score()
   end
 
   CATEGORIES = [Category.ones, Category.twos, Category.threes]
 
   private
 
-  NUM_RERUNS = 2
+  def play_all_categories
+    categories.each do |category|
+      play_category(category)
+    end
+  end
 
   def play_category category
-    @notifier.notify_current_category(category)
-    roll([:d1, :d2, :d3, :d4, :d5])
+    show_current_category(category)
+    roll_all_dice()
     do_reruns()
     score = compute_score(category)
     annotate_score(category, score)
-    @notifier.notify_current_category_score(category, score)
+    show_current_category_score(category, score)
   end
+
+  NUM_RERUNS = 2
 
   def do_reruns
     NUM_RERUNS.times do |reruns_so_far|
-      @notifier.notify_user_to_introduce_dice_to_rerun(reruns_so_far)
+      ask_user_dice_to_rerun(reruns_so_far)
       roll(dice_to_rerun)
     end
+  end
+
+  def roll_all_dice
+    roll([:d1, :d2, :d3, :d4, :d5])
+  end
+
+  def show_current_category category
+    @notifier.notify_current_category(category)
+  end
+
+  def show_current_category_score category, score
+    @notifier.notify_current_category_score(category, score)
+  end
+
+  def ask_user_dice_to_rerun reruns_so_far
+    @notifier.notify_user_to_introduce_dice_to_rerun(reruns_so_far)
   end
 
   def roll dice_to_roll
@@ -69,7 +88,7 @@ class Yahtzee
     @scores_history.max_score_for(category)
   end
 
-  def summarize_scores_by_category
+  def summarize_score()
     @notifier.notify_game_score(max_scores_by_category, final_score)
   end
 
