@@ -10,22 +10,22 @@ class Yahtzee
   end
 
   def play
-    @notifier.notify_current_category(:ones)
-    roll([:d1, :d2, :d3, :d4, :d5])
-    do_reruns()
-    score = compute_score(:ones)
-    @notifier.notify_current_category_score(:ones, score)
-
-    @notifier.notify_current_category(:twos)
-    roll([:d1, :d2, :d3, :d4, :d5])
-    do_reruns()
-    score = compute_score(:twos)
-    @notifier.notify_current_category_score(:twos, score)
+    [:ones, :twos].each do |category|
+      play_category(category)
+    end
   end
 
   private
 
   NUM_RERUNS = 2
+
+  def play_category category
+    @notifier.notify_current_category(category)
+    roll([:d1, :d2, :d3, :d4, :d5])
+    do_reruns()
+    score = compute_score(category)
+    @notifier.notify_current_category_score(category, score)
+  end
 
   def do_reruns
     NUM_RERUNS.times do |reruns_so_far|
