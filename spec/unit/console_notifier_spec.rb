@@ -1,3 +1,4 @@
+require_relative "../../category"
 require_relative "../../console_notifier"
 
 describe "Console Notifier" do
@@ -20,20 +21,20 @@ describe "Console Notifier" do
 
   describe "notifying the current category" do
     it "when it is Ones" do
-      notifier.notify_current_category(:ones)
+      notifier.notify_current_category(Category.ones)
 
       expect(console.output).to eq(["Category: Ones"])
     end
 
     it "when it is Twos" do
-      notifier.notify_current_category(:twos)
+      notifier.notify_current_category(Category.twos)
 
       expect(console.output).to eq(["Category: Twos"])
     end
   end
 
   it "notifying score for current category" do
-    notifier.notify_current_category_score(:twos, 3)
+    notifier.notify_current_category_score(Category.twos, 3)
 
     expect(console.output).to eq(["Category Twos score: 3"])
   end

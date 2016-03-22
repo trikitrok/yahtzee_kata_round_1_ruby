@@ -1,5 +1,5 @@
 require_relative "./input_line"
-require_relative "./dice_scorer"
+require_relative "./category"
 
 class Yahtzee
   def initialize console, user_input_reader, notifier, dice_roller
@@ -10,7 +10,7 @@ class Yahtzee
   end
 
   def play
-    CATEGORIES.each do |category|
+    categories.each do |category|
       play_category(category)
     end
 
@@ -21,6 +21,10 @@ class Yahtzee
 
   NUM_RERUNS = 2
   CATEGORIES = [:ones, :twos, :threes]
+
+  def categories
+    CATEGORIES.map {|category_id| Category.new(category_id)}
+  end
 
   def play_category category
     @notifier.notify_current_category(category)
@@ -48,7 +52,7 @@ class Yahtzee
   end
 
   def compute_score category
-    DiceScorer.for_category(category).compute_score(last_rolled_dice)
+    category.compute_score(last_rolled_dice)
   end
 
   def last_rolled_dice
