@@ -26,6 +26,7 @@ class ConsoleNotifier
 
   DESCRIPTIONS_BY_CATEGORY = {
     ones: "Ones",
-    twos: "Twos"
+    twos: "Twos",
+    threes: "Threes"
   }
 end

@@ -18,7 +18,7 @@ class Yahtzee
   private
 
   NUM_RERUNS = 2
-  CATEGORIES = [:ones, :twos]
+  CATEGORIES = [:ones, :twos, :threes]
 
   def play_category category
     @notifier.notify_current_category(category)
