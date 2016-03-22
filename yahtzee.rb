@@ -43,7 +43,7 @@ class Yahtzee
   end
 
   def roll_all_dice
-    roll([:d1, :d2, :d3, :d4, :d5])
+    roll(@dice_roller.all_dice)
   end
 
   def show_current_category category

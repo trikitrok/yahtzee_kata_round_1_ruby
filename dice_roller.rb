@@ -11,5 +11,9 @@ class DiceRoller
     end
   end
 
+  def all_dice
+    [:d1, :d2, :d3, :d4, :d5]
+  end
+
   attr_reader :last_rolled_dice
 end
