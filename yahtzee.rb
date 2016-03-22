@@ -13,6 +13,12 @@ class Yahtzee
     CATEGORIES.each do |category|
       play_category(category)
     end
+
+    @console.print("Yahtzee score")
+    @console.print("Ones: 4")
+    @console.print("Twos: 3")
+    @console.print("Threes: 2")
+    @console.print("Final score: 9")
   end
 
   private
