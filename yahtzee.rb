@@ -7,6 +7,7 @@ class Yahtzee
     @notifier = notifier
     @user_input_reader = user_input_reader
     @dice_roller = dice_roller
+    @scores_history = {}
   end
 
   def play
@@ -20,17 +21,14 @@ class Yahtzee
   private
 
   NUM_RERUNS = 2
-  CATEGORIES = [:ones, :twos, :threes]
-
-  def categories
-    CATEGORIES.map {|category_id| Category.new(category_id)}
-  end
+  CATEGORIES_IDS = [:ones, :twos, :threes]
 
   def play_category category
     @notifier.notify_current_category(category)
     roll([:d1, :d2, :d3, :d4, :d5])
     do_reruns()
     score = compute_score(category)
+    annotate_score(category, score)
     @notifier.notify_current_category_score(category, score)
   end
 
@@ -59,11 +57,20 @@ class Yahtzee
     @dice_roller.last_rolled_dice()
   end
 
+  def categories
+    CATEGORIES_IDS.map {|category_id| Category.new(category_id)}
+  end
+
+  def annotate_score category, score
+    @scores_history[category] = [] if @scores_history[category].nil?
+    @scores_history[category] << score
+  end
+
   def summarize_scores_by_category
     @console.print("Yahtzee score")
-    @console.print("Ones: 4")
-    @console.print("Twos: 3")
-    @console.print("Threes: 2")
+    @console.print("#{Category.ones.description}: #{@scores_history[Category.ones].max}")
+    @console.print("#{Category.twos.description}: #{@scores_history[Category.twos].max}")
+    @console.print("#{Category.threes.description}: #{@scores_history[Category.threes].max}")
     @console.print("Final score: 9")
   end
 end

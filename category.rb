@@ -23,6 +23,21 @@ class Category
     dice.select {|_, value| value == desired_value}.count
   end
 
+  def eql? other
+    other.category_id == @category_id
+  end
+
+  def == other
+    eql?(other)
+  end
+
+  def hash
+    @category_id.hash
+  end
+
+  protected
+  attr_reader :category_id
+
   private
 
   DESCRIPTIONS_BY_CATEGORY = {
