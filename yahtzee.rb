@@ -3,8 +3,7 @@ require_relative "./category"
 require_relative "./scores_history"
 
 class Yahtzee
-  def initialize console, user_input_reader, notifier, dice_roller
-    @console = console
+  def initialize user_input_reader, notifier, dice_roller
     @notifier = notifier
     @user_input_reader = user_input_reader
     @dice_roller = dice_roller
