@@ -21,4 +21,12 @@ class ConsoleNotifier
   def notify_current_category_score category, score
     @output.print("Category #{category.description} score: #{score}")
   end
+
+  def notify_game_score max_scores_by_category, final_score
+    @output.print("Yahtzee score")
+    max_scores_by_category.each do |category, max_score|
+      @output.print("#{category.description}: #{max_score}")
+    end
+    @output.print("Final score: #{final_score}")
+  end
 end
