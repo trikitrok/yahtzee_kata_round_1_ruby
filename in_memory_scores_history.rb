@@ -1,6 +1,6 @@
 require_relative "./category"
 
-class ScoresHistory
+class InMemoryScoresHistory
   def initialize categories
     @scores_history = categories.reduce({}) do |acc, category|
       acc[category] = []

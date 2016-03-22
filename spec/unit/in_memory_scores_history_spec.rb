@@ -1,8 +1,8 @@
-require_relative "../../scores_history"
+require_relative "../../in_memory_scores_history"
 
 describe "Scores history" do
   it "keeps the scores history and returns the maximum score by category and the final score" do
-    scores_history = ScoresHistory.new([Category.ones, Category.twos, Category.threes])
+    scores_history = InMemoryScoresHistory.new([Category.ones, Category.twos, Category.threes])
 
     scores_history.annotate_score(Category.ones, 3)
     scores_history.annotate_score(Category.twos, 2)

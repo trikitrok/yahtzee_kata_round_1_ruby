@@ -1,13 +1,13 @@
 require_relative "./input_line"
 require_relative "./category"
-require_relative "./scores_history"
+require_relative "./in_memory_scores_history"
 
 class Yahtzee
   def initialize user_input_reader, notifier, dice_roller
     @notifier = notifier
     @user_input_reader = user_input_reader
     @dice_roller = dice_roller
-    @scores_history = ScoresHistory.new(categories)
+    @scores_history = InMemoryScoresHistory.new(categories)
   end
 
   def play
