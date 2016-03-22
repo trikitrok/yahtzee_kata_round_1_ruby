@@ -31,4 +31,10 @@ describe "Console Notifier" do
       expect(console.output).to eq(["Category: Twos"])
     end
   end
+
+  it "notifying score for current category" do
+    notifier.notify_current_category_score(:twos, 3)
+
+    expect(console.output).to eq(["Category Twos score: 3"])
+  end
 end

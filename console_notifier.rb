@@ -18,8 +18,12 @@ class ConsoleNotifier
     @output.print("Category: #{DESCRIPTIONS_BY_CATEGORY[category]}")
   end
 
+  def notify_current_category_score category, score
+    @output.print("Category #{DESCRIPTIONS_BY_CATEGORY[category]} score: #{score}")
+  end
+
   private
-  
+
   DESCRIPTIONS_BY_CATEGORY = {
     ones: "Ones",
     twos: "Twos"
