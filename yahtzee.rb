@@ -10,7 +10,7 @@ class Yahtzee
   end
 
   def play
-    [:ones, :twos].each do |category|
+    CATEGORIES.each do |category|
       play_category(category)
     end
   end
@@ -18,6 +18,7 @@ class Yahtzee
   private
 
   NUM_RERUNS = 2
+  CATEGORIES = [:ones, :twos]
 
   def play_category category
     @notifier.notify_current_category(category)
