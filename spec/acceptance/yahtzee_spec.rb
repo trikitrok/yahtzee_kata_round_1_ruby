@@ -36,6 +36,7 @@ describe "Yahtzee game" do
                                   "[1] Dice to re-run:",
                                   "Dice: D1:2 D2:2 D3:1 D4:6 D5:3",
                                   "[2] Dice to re-run:",
-                                  "Dice: D1:2 D2:2 D3:6 D4:1 D5:2"])
+                                  "Dice: D1:2 D2:2 D3:6 D4:1 D5:2",
+                                  "Category Twos score: 3"])
   end
 end
