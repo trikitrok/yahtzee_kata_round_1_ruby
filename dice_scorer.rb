@@ -8,6 +8,6 @@ class DiceScorer
   end
 
   def compute_score dice
-    2
+    dice.select {|k,v| v == 1}.count
   end
 end
