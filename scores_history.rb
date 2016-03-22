@@ -16,4 +16,11 @@ class ScoresHistory
   def max_score_for category
     @scores_history[category].max
   end
+
+  def final_score
+    max_scores = @scores_history.map do |scores|
+      scores[1].max
+    end
+    max_scores.reduce(&:+)
+  end
 end
