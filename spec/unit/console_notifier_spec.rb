@@ -17,4 +17,18 @@ describe "Console Notifier" do
 
     expect(console.output).to eq(["[2] Dice to re-run:"])
   end
+
+  describe "notifying the current category" do
+    it "when it is Ones" do
+      notifier.notify_current_category(:ones)
+
+      expect(console.output).to eq(["Category: Ones"])
+    end
+
+    it "when it is Twos" do
+      notifier.notify_current_category(:twos)
+
+      expect(console.output).to eq(["Category: Twos"])
+    end
+  end
 end
