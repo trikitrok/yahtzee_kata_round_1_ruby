@@ -1,4 +1,5 @@
-require "./input_line"
+require_relative "./input_line"
+require_relative "./dice_scorer"
 
 class Yahtzee
   def initialize console, user_input_reader, notifier, dice_roller
@@ -12,11 +13,13 @@ class Yahtzee
     @console.print("Category: Ones")
     roll([:d1, :d2, :d3, :d4, :d5])
     do_reruns()
-    @console.print("Category Ones score: 4")
+    score = compute_score(:ones)
+    @console.print("Category Ones score: #{score}")
     @console.print("Category: Twos")
     roll([:d1, :d2, :d3, :d4, :d5])
     do_reruns()
-    @console.print("Category Twos score: 3")
+    score = compute_score(:twos)
+    @console.print("Category Twos score: #{score}")
   end
 
   private
@@ -40,4 +43,9 @@ class Yahtzee
     input_line = InputLine.new(@user_input_reader.read_line())
     input_line.dice_to_rerun()
   end
+
+  def compute_score category
+    DiceScorer.for_category(category).compute_score(@dice_roller.last_rolled_dice())
+  end
+
 end
