@@ -4,8 +4,8 @@ class ConsoleNotifier
   end
 
   def notify_rolled_dice rolled_dice
-    formatted_dice_strs = rolled_dice.each_with_index.map do |die, i|
-      "D#{i+1}:#{rolled_dice[i]}"
+    formatted_dice_strs = rolled_dice.map do |die|
+      "#{die[0].to_s.capitalize}:#{die[1]}"
     end
     @output.print("Dice: " + formatted_dice_strs.join(" "))
   end

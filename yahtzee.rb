@@ -37,7 +37,7 @@ class Yahtzee
 
   def roll dice_to_roll
     @dice_roller.roll(dice_to_roll)
-    @notifier.notify_rolled_dice(last_rolled_dice.values())
+    @notifier.notify_rolled_dice(last_rolled_dice)
   end
 
   def dice_to_rerun
@@ -52,5 +52,4 @@ class Yahtzee
   def last_rolled_dice
     @dice_roller.last_rolled_dice()
   end
-
 end
