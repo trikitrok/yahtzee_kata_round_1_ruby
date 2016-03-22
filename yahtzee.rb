@@ -19,18 +19,16 @@ class Yahtzee
   private
 
   def play_all_categories
-    categories.each do |category|
-      play_category(category)
-    end
+    CATEGORIES.each { |category| play_category(category) }
   end
 
   def play_category category
-    show_current_category(category)
-    roll_all_dice()
+    @notifier.notify_current_category(category)
+    roll(@dice_roller.all_dice)
     do_reruns()
-    score = compute_score(category)
-    annotate_score(category, score)
-    show_current_category_score(category, score)
+    score = category.compute_score(last_rolled_dice)
+    @scores_history.annotate_score(category, score)
+    @notifier.notify_current_category_score(category, score)
   end
 
   NUM_RERUNS = 2
@@ -40,18 +38,6 @@ class Yahtzee
       ask_user_dice_to_rerun(reruns_so_far)
       roll(dice_to_rerun)
     end
-  end
-
-  def roll_all_dice
-    roll(@dice_roller.all_dice)
-  end
-
-  def show_current_category category
-    @notifier.notify_current_category(category)
-  end
-
-  def show_current_category_score category, score
-    @notifier.notify_current_category_score(category, score)
   end
 
   def ask_user_dice_to_rerun reruns_so_far
@@ -68,38 +54,14 @@ class Yahtzee
     input_line.dice_to_rerun()
   end
 
-  def compute_score category
-    category.compute_score(last_rolled_dice)
-  end
-
   def last_rolled_dice
     @dice_roller.last_rolled_dice()
   end
 
-  def categories
-    CATEGORIES
-  end
-
-  def annotate_score category, score
-    @scores_history.annotate_score(category, score)
-  end
-
-  def max_score_for category
-    @scores_history.max_score_for(category)
-  end
-
   def summarize_score()
-    @notifier.notify_game_score(max_scores_by_category, final_score)
-  end
-
-  def final_score
-    @scores_history.final_score
-  end
-
-  def max_scores_by_category
-    categories.reduce({}) do |acc, category|
-      acc[category] = @scores_history.max_score_for(category)
-      acc
-    end
+    @notifier.notify_game_score(
+      @scores_history.max_scores_by_category(CATEGORIES), 
+      @scores_history.final_score
+    )
   end
 end
