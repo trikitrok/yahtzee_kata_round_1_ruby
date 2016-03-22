@@ -71,15 +71,17 @@ class Yahtzee
   end
 
   def summarize_scores_by_category
-    @console.print("Yahtzee score")
-    max_scores_by_category = categories.reduce({}) do |acc, category|
+    @notifier.notify_game_score(max_scores_by_category, final_score)
+  end
+
+  def final_score
+    @scores_history.final_score
+  end
+
+  def max_scores_by_category
+    categories.reduce({}) do |acc, category|
       acc[category] = @scores_history.max_score_for(category)
       acc
     end
-    max_scores_by_category.each do |category, max_score|
-      @console.print("#{category.description}: #{max_score}")
-    end
-    final_score = @scores_history.final_score
-    @console.print("Final score: #{final_score}")
   end
 end
