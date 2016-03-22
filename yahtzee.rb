@@ -14,11 +14,7 @@ class Yahtzee
       play_category(category)
     end
 
-    @console.print("Yahtzee score")
-    @console.print("Ones: 4")
-    @console.print("Twos: 3")
-    @console.print("Threes: 2")
-    @console.print("Final score: 9")
+    summarize_scores_by_category()
   end
 
   private
@@ -57,5 +53,13 @@ class Yahtzee
 
   def last_rolled_dice
     @dice_roller.last_rolled_dice()
+  end
+
+  def summarize_scores_by_category
+    @console.print("Yahtzee score")
+    @console.print("Ones: 4")
+    @console.print("Twos: 3")
+    @console.print("Threes: 2")
+    @console.print("Final score: 9")
   end
 end
