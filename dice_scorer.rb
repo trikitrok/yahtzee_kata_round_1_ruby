@@ -8,11 +8,14 @@ class DiceScorer
   end
 
   def compute_score dice
-    desired_value = VALUES_BY_CATEGORY[@category]
     dice.select {|_, value| value == desired_value}.count
   end
 
   private 
+
+  def desired_value 
+    VALUES_BY_CATEGORY[@category]
+  end
 
   VALUES_BY_CATEGORY = {ones: 1, twos: 2}
 end
