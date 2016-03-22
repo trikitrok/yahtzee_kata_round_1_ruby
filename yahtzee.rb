@@ -1,5 +1,6 @@
 require_relative "./input_line"
 require_relative "./category"
+require_relative "./scores_history"
 
 class Yahtzee
   def initialize console, user_input_reader, notifier, dice_roller
@@ -7,7 +8,7 @@ class Yahtzee
     @notifier = notifier
     @user_input_reader = user_input_reader
     @dice_roller = dice_roller
-    @scores_history = {}
+    @scores_history = ScoresHistory.new(categories)
   end
 
   def play
@@ -62,15 +63,23 @@ class Yahtzee
   end
 
   def annotate_score category, score
-    @scores_history[category] = [] if @scores_history[category].nil?
-    @scores_history[category] << score
+    @scores_history.annotate_score(category, score)
+  end
+
+  def max_score_for category
+    @scores_history.max_score_for(category)
   end
 
   def summarize_scores_by_category
     @console.print("Yahtzee score")
-    @console.print("#{Category.ones.description}: #{@scores_history[Category.ones].max}")
-    @console.print("#{Category.twos.description}: #{@scores_history[Category.twos].max}")
-    @console.print("#{Category.threes.description}: #{@scores_history[Category.threes].max}")
-    @console.print("Final score: 9")
+    max_scores_by_category = categories.reduce({}) do |acc, category|
+      acc[category] = @scores_history.max_score_for(category)
+      acc
+    end
+    max_scores_by_category.each do |category, max_score|
+      @console.print("#{category.description}: #{max_score}")
+    end
+    final_score = @scores_history.final_score
+    @console.print("Final score: #{final_score}")
   end
 end
