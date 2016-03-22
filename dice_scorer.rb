@@ -17,5 +17,5 @@ class DiceScorer
     VALUES_BY_CATEGORY[@category]
   end
 
-  VALUES_BY_CATEGORY = {ones: 1, twos: 2}
+  VALUES_BY_CATEGORY = {ones: 1, twos: 2, threes: 3}
 end
