@@ -20,7 +20,7 @@ class Category
   end
 
   def compute_score dice
-    dice.select {|_, value| value == desired_value}.count
+    dice.count {|_, value| value == desired_value}
   end
 
   def eql? other
