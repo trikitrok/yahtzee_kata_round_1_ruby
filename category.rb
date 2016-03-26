@@ -16,7 +16,7 @@ class Category
   end
 
   def description
-    DESCRIPTIONS_BY_CATEGORY[@category_id]
+    DESCRIPTIONSY[@category_id]
   end
 
   def compute_score dice
@@ -40,15 +40,15 @@ class Category
 
   private
 
-  DESCRIPTIONS_BY_CATEGORY = {
+  DESCRIPTIONSY = {
     ones: "Ones",
     twos: "Twos",
     threes: "Threes"
   }
 
   def desired_value 
-    VALUES_BY_CATEGORY[@category_id]
+    VALUES[@category_id]
   end
 
-  VALUES_BY_CATEGORY = {ones: 1, twos: 2, threes: 3}
+  VALUES = {ones: 1, twos: 2, threes: 3}
 end
